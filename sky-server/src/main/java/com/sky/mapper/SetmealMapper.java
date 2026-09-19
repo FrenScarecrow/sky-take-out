@@ -47,6 +47,21 @@ public interface SetmealMapper {
     void deleteById(Long setmealId);
 
     /**
+     * 分页查询
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    /**
+     * 根据id修改套餐
+     *
+     * @param setmeal
+     */
+    @AutoFill(OperationType.UPDATE)
+    void update(Setmeal setmeal);
+
+    /**
      * 动态条件查询套餐
      * @param setmeal
      * @return
@@ -62,19 +77,4 @@ public interface SetmealMapper {
             "from setmeal_dish sd left join dish d on sd.dish_id = d.id " +
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
-
-    /**
-     * 分页查询
-     * @param setmealPageQueryDTO
-     * @return
-     */
-    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
-
-    /**
-     * 根据id修改套餐
-     *
-     * @param setmeal
-     */
-    @AutoFill(OperationType.UPDATE)
-    void update(Setmeal setmeal);
 }

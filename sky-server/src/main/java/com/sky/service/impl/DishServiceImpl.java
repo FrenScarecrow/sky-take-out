@@ -59,7 +59,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public PageResult list(DishPageQueryDTO dishPageQueryDTO) {
+    public PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO) {
         PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
 
         Page<DishVO> page = dishMapper.pageQuery(dishPageQueryDTO);
@@ -176,5 +176,18 @@ public class DishServiceImpl implements DishService {
                 }
             }
         }
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishMapper.list(dish);
     }
 }
