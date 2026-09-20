@@ -6,9 +6,14 @@
         insert into shopping_cart (name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time)
         value(#{name}, #{image}, #{userId}, #{dishId}, #{setmealId}, #{dishFlavor}, #{number}, #{amount}, #{createTime})
     </insert>
+
     <update id="updateNumberById">
         update shopping_cart set number=#{number} where id=#{id}
     </update>
+
+    <delete id="deleteByUserId">
+        delete from shopping_cart where user_id=#{userId}
+    </delete>
 
 
     <select id="list" resultType="com.sky.entity.ShoppingCart">
